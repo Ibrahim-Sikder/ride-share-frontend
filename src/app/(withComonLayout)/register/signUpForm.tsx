@@ -5,28 +5,36 @@ import { useRouter } from "next/navigation";
 import { createRef, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
-import { signUpUser } from "../actions/auth";
+// import { signUpUser } from "../actions/auth";
 import ActionSubmitButton from "../components/button/ActionSubmitButton";
+import { signUpUser } from "../actions/auth";
 
 export default function SignUpForm() {
-  const ref = createRef<HTMLFormElement>();
-  const router = useRouter();
-  const [state, formAction] = useFormState(signUpUser, null);
+  // const ref = createRef<HTMLFormElement>();
+  // const router = useRouter();
+  // const [state, formAction] = useFormState(signUpUser, null);
 
-  useEffect(() => {
-    if (state && state?.success) {
-      toast.success("successfully signUp", { id: 1, duration: 2000 });
-      ref.current!.reset();
-      router.push("/login");
-    }
-    if (state && !state?.success) {
-      toast.error(state?.message, { id: 1, duration: 2000 });
-    }
-  }, [router, state, ref]);
+  // useEffect(() => {
+  //   if (state && state?.success) {
+  //     toast.success("successfully signUp", { id: 1, duration: 2000 });
+  //     ref.current!.reset();
+  //     router.push("/login");
+  //   }
+  //   if (state && !state?.success) {
+  //     toast.error(state?.message, { id: 1, duration: 2000 });
+  //   }
+  // }, [router, state, ref]);
 
+  const [state, formAction] = useFormState(signUpUser, null)
+
+  useEffect(()=>{
+    if(state && state.success){
+      toast.success('User create successfully!')
+    }
+  },[state])
   return (
     <div>
-      <form ref={ref} action={formAction}>
+      <form action={formAction}>
         <Input name="name" type="text" label="Name" variant="bordered" />
         <Input
           name="email"

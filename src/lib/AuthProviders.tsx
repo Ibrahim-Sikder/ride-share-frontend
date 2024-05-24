@@ -1,5 +1,5 @@
 "use client";
-import { userInfo } from "@/app/(withComonLayout)/actions/auth";
+// import { userInfo } from "@/app/(withComonLayout)/actions/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<any>({

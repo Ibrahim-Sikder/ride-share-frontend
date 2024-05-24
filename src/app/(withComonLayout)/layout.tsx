@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { userInfo } from "./actions/auth";
+// import { userInfo } from "./actions/auth";
 import Footer from "./components/pages/shared/Footer";
 import NavBar from "./components/pages/shared/Navbar";
 
@@ -13,10 +13,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await userInfo();
+  // const user = await userInfo();
   return (
     <div>
-      <NavBar user={user} />
+      <NavBar />
       <div className="mx-auto container">{children}</div>
       <Footer />
     </div>
