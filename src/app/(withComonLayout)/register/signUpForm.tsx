@@ -25,13 +25,16 @@ export default function SignUpForm() {
   //   }
   // }, [router, state, ref]);
 
-  const [state, formAction] = useFormState(signUpUser, null)
 
+
+  const [state, formAction] = useFormState(signUpUser, null)
+const ref = createRef<HTMLFormElement>()
   useEffect(()=>{
     if(state && state.success){
-      toast.success('User create successfully!')
+      toast.success('User create successfully!');
+      ref.current?.reset()
     }
-  },[state])
+  },[state, ref])
   return (
     <div>
       <form action={formAction}>
