@@ -11,10 +11,30 @@ import { loginUser } from "../actions/auth";
 import ActionSubmitButton from "../components/button/ActionSubmitButton";
 
 export default function LoginForm() {
+  const [state, fromAction] = useFormState(loginUser, null)
+  const ref = createRef<HTMLFormElement>()
+  const router = useRouter()
+  try{
+    if(state && state?.success){
+      toast.success(state?.message)
+      router.push('/')
+    }
+    if(state && !state?.success){
+      toast.error(state?.message)
+    }
+
+  }catch(err){
+    console.log(err)
+  }
+
+  useEffect(()=>{
+    console.log(state)
+
+  },[state,ref])
 
   return (
     <div>
-      <form >
+      <form ref={ref} action={fromAction}>
         <Input name="email" type="email" label="Email" variant="bordered" />
         <Input
           className="mt-3"

@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { Button, Spinner } from "@nextui-org/react";
 import { ReactNode } from "react";

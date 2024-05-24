@@ -74,7 +74,7 @@ import { cookies } from "next/headers";
 //   let decodedData = null;
 //   if (accessToken) {
 //     decodedData = (await jwtDecode(accessToken)) as any;
-   
+
 //     return { email: decodedData.email, role: decodedData.role ,id: decodedData.id};
 //   } else {
 //     return null;
@@ -88,26 +88,52 @@ import { cookies } from "next/headers";
 //   return cookies().get(cooke)?.value;
 // };
 
-
-
-export async function signUpUser(pre:FormData, formData:FormData){
-
- try{
-  const formattedData = JSON.stringify(Object.fromEntries(formData))
-  const res = await fetch(`${process.env.localUrl}/auth/register`,{
-    method: 'POST',
-    headers:{
-      'Content-type': 'application/json',
-    },
-    body: formattedData,
-  });
-  const data = await res.json();
-  return data;
-
- }catch(error){
-  throw error
- }
-
-
-
+export async function signUpUser(pre: FormData, formData: FormData) {
+  try {
+    const formattedData = JSON.stringify(Object.fromEntries(formData));
+    const res = await fetch(`${process.env.localUrl}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: formattedData,
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function loginUser(pre: FormData, formData: FormData) {
+  try {
+    const formattedData = JSON.stringify(Object.fromEntries(formData));
+    const res = await fetch(`${process.env.localUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: formattedData,
+    });
+    const data = await res.json();
+    if (data.success) {
+      cookies().set("accessToken", data?.data?.accessToken);
+      cookies().set("refreshToken", data?.data?.refreshToken);
+    }
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function userInfo() {
+  try {
+    const accessToken = cookies().get("accessToken")?.value;
+    if(accessToken){
+      let decodedData = null
+      decodedData = await jwtDecode(accessToken);
+      return {email: decodedData.email, role:decodedData.role, id:decodedData.id}
+      const role = decodedData?.role 
+    }
+  } catch (error) {
+    throw error;
+  }
 }

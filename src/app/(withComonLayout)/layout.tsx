@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import { userInfo } from "./actions/auth";
 import Footer from "./components/pages/shared/Footer";
 import NavBar from "./components/pages/shared/Navbar";
+import { userInfo } from "./actions/auth";
 
 export const metadata: Metadata = {
   title: "Apollo Gears",
@@ -13,10 +14,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const user = await userInfo();
+  const user = await userInfo();
   return (
     <div>
-      <NavBar />
+      <NavBar user={user}/>
       <div className="mx-auto container">{children}</div>
       <Footer />
     </div>

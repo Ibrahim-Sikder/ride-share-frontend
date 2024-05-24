@@ -1,6 +1,6 @@
 "use client";
-import { logOut } from "@/app/(withComonLayout)/actions/auth";
-import { useAuth } from "@/lib/AuthProviders";
+// import { logOut } from "@/app/(withComonLayout)/actions/auth";
+
 import {
   Button,
   Navbar,
@@ -12,7 +12,10 @@ import { Cog } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { useAuth } from "@/lib/AuthProviders";
 export default function NavBar({ user }: any) {
+  console.log(user)
+
   const router = useRouter();
   const { setUser } = useAuth();
   const routeMap: Record<string, string> = {
@@ -20,11 +23,11 @@ export default function NavBar({ user }: any) {
     admin: "/dashboard/admin",
     driver: "/dashboard/driver",
   };
-  const logOutUser = async () => {
-    await logOut();
-    setUser(null);
-    router.push("/");
-  };
+  // const logOutUser = async () => {
+  //   await logOut();
+  //   setUser(null);
+  //   router.push("/");
+  // };
   return (
     <Navbar maxWidth="2xl">
       <NavbarBrand>
@@ -56,7 +59,7 @@ export default function NavBar({ user }: any) {
 
         {user ? (
           <NavbarItem>
-            <Button onClick={logOutUser} color="primary" variant="flat">
+            <Button color="primary" variant="flat">
               Logout
             </Button>
           </NavbarItem>
