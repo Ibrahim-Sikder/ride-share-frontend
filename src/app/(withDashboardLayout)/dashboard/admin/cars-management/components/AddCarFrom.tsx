@@ -33,6 +33,7 @@ const conditions = [
   { label: "Used", value: "Used" },
 ];
 
+
 export default function AddCarForm({ onClose }: any) {
   const router = useRouter();
   const ref = createRef<HTMLFormElement>();

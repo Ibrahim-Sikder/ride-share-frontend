@@ -42,66 +42,63 @@ export default function CarsTable({ data }: any) {
     onOpen();
     setSelected(id);
   };
-  const renderCell = React.useCallback(
-    (data: any, columnKey: React.Key) => {
-      const cellValue = data[columnKey as any];
+  const renderCell = React.useCallback((data: any, columnKey: React.Key) => {
+    const cellValue = data[columnKey as any];
 
-      switch (columnKey) {
-        case "name":
-          return (
-            <User
-              avatarProps={{ radius: "lg", src: data.image }}
-              description={data.brand}
-              name={cellValue}
-            >
-              {data.name}
-            </User>
-          );
-        case "brand":
-          return (
-            <div className="flex flex-col">
-              <p className="text-bold text-sm capitalize text-default-400">
-                {data.brand}
-              </p>
-            </div>
-          );
-        case "color":
-          return (
-            <Chip
-              className="capitalize"
-              // color={statusColorMap[user.status]}
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
-            </Chip>
-          );
-        case "actions":
-          return (
-            <div className="relative flex items-center gap-2">
-              <Tooltip content="Details">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <Eye />
-                </span>
-              </Tooltip>
-              <Tooltip content="Edit user">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <Edit onClick={() => handleUpdate(data)} />
-                </span>
-              </Tooltip>
-              <Tooltip color="danger" content="Delete user">
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <Trash onClick={() => handleDelete(data._id)} />
-                </span>
-              </Tooltip>
-            </div>
-          );
-        default:
-          return cellValue;
-      }
-    },
-    []
-  );
+    switch (columnKey) {
+      case "name":
+        return (
+          <User
+            avatarProps={{ radius: "lg", src: data.image }}
+            description={data.brand}
+            name={cellValue}
+          >
+            {data.name}
+          </User>
+        );
+      case "brand":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize text-default-400">
+              {data.brand}
+            </p>
+          </div>
+        );
+      case "color":
+        return (
+          <Chip
+            className="capitalize"
+            // color={statusColorMap[user.status]}
+            size="sm"
+            variant="flat"
+          >
+            {cellValue}
+          </Chip>
+        );
+      case "actions":
+        return (
+          <div className="relative flex items-center gap-2">
+            <Tooltip content="Details">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <Eye />
+              </span>
+            </Tooltip>
+            <Tooltip content="Edit user">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <Edit onClick={() => handleUpdate(data)} />
+              </span>
+            </Tooltip>
+            <Tooltip color="danger" content="Delete user">
+              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <Trash onClick={() => handleDelete(data._id)} />
+              </span>
+            </Tooltip>
+          </div>
+        );
+      default:
+        return cellValue;
+    }
+  }, []);
   return (
     <div>
       <CustomModal

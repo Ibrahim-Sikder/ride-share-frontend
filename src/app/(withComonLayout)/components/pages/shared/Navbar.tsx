@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { useAuth } from "@/lib/AuthProviders";
+import { logOut } from "@/app/(withComonLayout)/actions/auth";
 export default function NavBar({ user }: any) {
   console.log(user)
 
@@ -23,11 +24,11 @@ export default function NavBar({ user }: any) {
     admin: "/dashboard/admin",
     driver: "/dashboard/driver",
   };
-  // const logOutUser = async () => {
-  //   await logOut();
-  //   setUser(null);
-  //   router.push("/");
-  // };
+  const logOutUser = async () => {
+    await logOut();
+    setUser(null);
+    router.push("/");
+  };
   return (
     <Navbar maxWidth="2xl">
       <NavbarBrand>
@@ -59,13 +60,14 @@ export default function NavBar({ user }: any) {
 
         {user ? (
           <NavbarItem>
-            <Button color="primary" variant="flat">
+            <Button onClick={logOutUser} color="primary" variant="flat">
               Logout
             </Button>
           </NavbarItem>
         ) : (
           <NavbarItem className="hidden lg:flex">
             <Link href="/login">Login</Link>
+            
           </NavbarItem>
         )}
       </NavbarContent>

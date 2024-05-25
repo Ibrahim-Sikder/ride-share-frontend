@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: " Apollo Gears.",
 };
 export default async function carsPage() {
-  const res = await fetch(`${process.env.serverUrl}/cars?limit=200`, {
+  const res = await fetch(`${process.env.localUrl}/cars?limit=200`, {
     // next:{
     //   tags:["cars"],
       

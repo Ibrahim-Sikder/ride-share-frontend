@@ -137,3 +137,12 @@ export async function userInfo() {
     throw error;
   }
 }
+export async function logOut() {
+  try {
+   cookies().delete('accessToken') 
+   cookies().delete('refreshToken') 
+    
+  } catch (error) {
+    throw error;
+  }
+}
